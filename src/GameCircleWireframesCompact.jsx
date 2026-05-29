@@ -20,21 +20,80 @@ const pages = [
       {
         type: "section",
         title: "Prochaines soirées",
-        cards: [{ title: "Soirée anniversaire", meta: "24 juin · 8 participants", badge: "Préparation", action: "Voir" }],
+        cards: [
+          { title: "Noël famille 2026", meta: "Ce soir · soirée en cours", badge: "Live", action: "Entrer" },
+          { title: "Soirée anniversaire", meta: "24 juin · 8 participants", badge: "Préparation", action: "Voir" },
+        ],
       },
       {
         type: "section",
-        title: "Mes cercles",
+        title: "Mes cercles récents",
         cards: [
-          { title: "Famille & amis", meta: "12 membres · 3 éditions", badge: "Organisateur", action: "Entrer" },
-          { title: "Collègues", meta: "6 membres · 1 édition", badge: "Membre", action: "Entrer" },
+          { title: "Famille & amis", meta: "12 membres · prochaine édition ce soir", badge: "Organisateur", action: "Entrer" },
+          { title: "Collègues", meta: "6 membres · 1 édition passée", badge: "Membre", action: "Entrer" },
         ],
       },
-      { type: "actions", title: "Action rapide", actions: ["Créer un cercle"] },
+      { type: "info", text: "Le dashboard sert à reprendre rapidement une soirée, un cercle ou une édition en cours." },
     ],
   },
   {
-    title: "Invitation",
+    title: "Mes cercles",
+    subtitle: "Vue utilisateur · Onglet cercles",
+    role: "utilisateur",
+    phase: "socle",
+    nav: "Cercles",
+    scroll: true,
+    showBottomNav: true,
+    blocks: [
+      { type: "hero", title: "Mes cercles", text: "Retrouve les cercles auxquels tu appartiens ou crée un nouveau cercle." },
+      {
+        type: "section",
+        title: "Cercles actifs",
+        cards: [
+          { title: "Famille & amis", meta: "12 membres · rôle organisateur", badge: "Organisateur", action: "Entrer" },
+          { title: "Collègues", meta: "6 membres · rôle membre", badge: "Membre", action: "Entrer" },
+        ],
+      },
+      { type: "actions", title: "Actions", actions: ["Créer un cercle"] },
+      { type: "info", text: "Un cercle est un espace durable. Une édition est une soirée précise organisée dans ce cercle." },
+    ],
+  },
+  {
+    title: "Mes soirées",
+    subtitle: "Vue utilisateur · Onglet soirées",
+    role: "utilisateur",
+    phase: "socle",
+    nav: "Soirées",
+    scroll: true,
+    showBottomNav: true,
+    blocks: [
+      { type: "hero", title: "Mes soirées", text: "Toutes les éditions à venir, en préparation, en cours ou clôturées." },
+      {
+        type: "section",
+        title: "À venir / en préparation",
+        cards: [
+          { title: "Noël famille 2026", meta: "Famille & amis · préparation", badge: "À préparer", action: "Ouvrir" },
+          { title: "Soirée anniversaire", meta: "Famille & amis · 24 juin", badge: "Prévue", action: "Voir" },
+        ],
+      },
+      {
+        type: "section",
+        title: "En cours",
+        cards: [
+          { title: "Blind test en cours", meta: "Noël famille 2026 · jeu 1 sur 10", badge: "Live", action: "Rejoindre" },
+        ],
+      },
+      {
+        type: "section",
+        title: "Clôturées",
+        cards: [
+          { title: "Anniversaire Julie", meta: "12 octobre · résultats disponibles", badge: "Historique", action: "Résultats" },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Invitation cercle",
     subtitle: "Vue utilisateur · Lien d’invitation",
     role: "utilisateur",
     phase: "socle",
@@ -42,9 +101,9 @@ const pages = [
     scroll: false,
     showBottomNav: true,
     blocks: [
-      { type: "hero", title: "Rejoindre un cercle", text: "Tu as été invité à rejoindre Famille & amis." },
+      { type: "hero", title: "Rejoindre un cercle", text: "Julie t’a invité à rejoindre le cercle Famille & amis." },
       { type: "circleHeader", title: "Famille & amis", text: "12 membres · cercle privé" },
-      { type: "info", text: "Après validation, tu deviendras membre de ce cercle." },
+      { type: "info", text: "Après validation, tu deviendras membre de ce cercle. Tu pourras ensuite être invité aux éditions du cercle." },
       { type: "primary", action: "Rejoindre le cercle" },
     ],
   },
@@ -57,9 +116,40 @@ const pages = [
     scroll: false,
     showBottomNav: true,
     blocks: [
-      { type: "hero", title: "Invitation expirée", text: "Ce lien ne permet plus de rejoindre le cercle." },
-      { type: "warning", title: "Lien inutilisable", text: "Demande à un organisateur du cercle de générer une nouvelle invitation." },
+      { type: "hero", title: "Invitation expirée", text: "Ce lien ne permet plus de rejoindre le cercle Famille & amis." },
+      { type: "warning", title: "Lien inutilisable", text: "Demande à Julie ou à un organisateur du cercle de générer une nouvelle invitation." },
       { type: "primary", action: "Retour au dashboard" },
+    ],
+  },
+  {
+    title: "Invitation édition",
+    subtitle: "Vue membre · Invitation à une soirée",
+    role: "membre",
+    phase: "socle",
+    nav: "Soirées",
+    scroll: true,
+    showBottomNav: true,
+    blocks: [
+      { type: "hero", title: "Invitation à une édition", text: "Julie t’a invité à participer à Noël famille 2026." },
+      {
+        type: "section",
+        title: "Détails de l’édition",
+        cards: [
+          { title: "Cercle", meta: "Famille & amis", badge: "Cercle" },
+          { title: "Date", meta: "24 décembre · 20h30", badge: "Prévue" },
+          { title: "Participants", meta: "7 personnes prévues", badge: "Info" },
+        ],
+      },
+      {
+        type: "choiceList",
+        title: "Ta réponse",
+        choices: [
+          { title: "Je participe", meta: "Tu seras compté comme confirmé.", selected: true },
+          { title: "Je suis incertain", meta: "Tu seras compté dans l’estimation, mais à confirmer.", selected: false },
+          { title: "Je refuse", meta: "Tu ne seras pas compté dans l’édition.", selected: false },
+        ],
+      },
+      { type: "primary", action: "Envoyer ma réponse" },
     ],
   },
   {
@@ -84,7 +174,7 @@ const pages = [
     role: "utilisateur",
     phase: "socle",
     nav: "Profil",
-    scroll: false,
+    scroll: true,
     showBottomNav: true,
     blocks: [
       { type: "profileHeader", name: "Micka", meta: "micka_dev · membre de 2 cercles" },
@@ -94,6 +184,14 @@ const pages = [
         cards: [
           { title: "Email", meta: "micka@example.com", badge: "Compte" },
           { title: "Avatar", meta: "Image de profil actuelle", badge: "Profil" },
+        ],
+      },
+      {
+        type: "section",
+        title: "Récompenses obtenues",
+        cards: [
+          { title: "Tasse de Noël", meta: "1re place · Noël famille 2026", badge: "Lot" },
+          { title: "Jeux à gratter", meta: "2 lots gagnés en 2026", badge: "Historique" },
         ],
       },
       { type: "actions", title: "Actions", actions: ["Modifier le profil", "Paramètres du compte"] },
@@ -110,11 +208,7 @@ const pages = [
     blocks: [
       { type: "hero", title: "Paramètres", text: "Gère ton compte, ton email et ton mot de passe." },
       { type: "actions", title: "Compte", actions: ["Modifier email", "Changer mot de passe"] },
-      {
-        type: "warning",
-        title: "Zone sensible",
-        text: "La suppression du compte devra préserver l’historique des anciennes éditions sous forme anonymisée.",
-      },
+      { type: "warning", title: "Zone sensible", text: "La suppression du compte devra préserver l’historique des anciennes éditions sous forme anonymisée." },
       { type: "primary", action: "Demander la suppression" },
     ],
   },
@@ -151,7 +245,7 @@ const pages = [
     subtitle: "Vue organisateur · Infos de base",
     role: "organisateur",
     phase: "preparation",
-    nav: "Cercles",
+    nav: "Soirées",
     scroll: true,
     showBottomNav: true,
     blocks: [
@@ -163,26 +257,27 @@ const pages = [
   },
   {
     title: "Préparation",
-    subtitle: "Vue organisateur · Vue d’ensemble",
+    subtitle: "Vue organisateur · Dashboard de préparation",
     role: "organisateur",
     phase: "preparation",
-    nav: "Cercles",
+    nav: "Soirées",
     scroll: true,
     showBottomNav: true,
     blocks: [
-      { type: "hero", title: "Noël famille 2026", text: "Préparation en cours · 7 participants prévus" },
+      { type: "hero", title: "Noël famille 2026", text: "Préparation en cours · avance dans l’ordre que tu veux." },
       {
         type: "prepProgress",
         steps: [
-          { title: "Infos", meta: "Nom et date renseignés", status: "OK" },
-          { title: "Participants", meta: "7 prévus · 1 incertain", status: "OK" },
-          { title: "Jeux", meta: "10 jeux · durée estimée 2h10", status: "OK" },
-          { title: "Ordre", meta: "Ordre défini", status: "OK" },
+          { title: "Infos", meta: "Nom, date et lieu renseignés", status: "Validé" },
+          { title: "Participants", meta: "7 prévus · invitations envoyées", status: "Validé" },
+          { title: "Jeux", meta: "10 jeux choisis · durée 2h10", status: "Validé" },
+          { title: "Ordre", meta: "Ordre défini selon vos préférences", status: "Validé" },
+          { title: "Récompenses", meta: "4 lots prévus", status: "Validé" },
           { title: "Matériel", meta: "14 éléments · 10 cochés", status: "À finir" },
-          { title: "Récompenses", meta: "4 lots prévus", status: "OK" },
           { title: "Validation", meta: "Dernier contrôle avant lancement", status: "À faire" },
         ],
       },
+      { type: "helpBox", title: "Mode préparation", text: "Tu peux préparer dans l’ordre conseillé ou revenir sur une étape quand tu veux. Les étapes validées restent visibles." },
       { type: "primary", action: "Continuer la préparation" },
     ],
   },
@@ -191,22 +286,23 @@ const pages = [
     subtitle: "Vue organisateur · Édition précise",
     role: "organisateur",
     phase: "preparation",
-    nav: "Cercles",
+    nav: "Soirées",
     scroll: true,
     showBottomNav: true,
     blocks: [
-      { type: "hero", title: "Qui participe à cette édition ?", text: "Les invités, confirmés et incertains comptent pour vérifier les jeux." },
-      { type: "actions", title: "Ajouter", actions: ["Ajouter un membre", "Ajouter un invité"] },
+      { type: "hero", title: "Qui participe à cette édition ?", text: "Ajoute les membres du cercle ou les invités sans compte pour cette soirée précise." },
+      { type: "actions", title: "Ajouter", actions: ["Inviter un membre du cercle", "Ajouter un invité sans compte"] },
       {
         type: "section",
         title: "Participants prévus",
         cards: [
-          { title: "Julie", meta: "Membre du cercle", badge: "Confirmée" },
-          { title: "Lenny", meta: "Membre du cercle", badge: "Invité" },
-          { title: "Benoît", meta: "Invité sans compte", badge: "Incertain" },
+          { title: "Julie", meta: "Membre du cercle · réponse confirmée", badge: "Confirmée" },
+          { title: "Lenny", meta: "Membre du cercle · invitation envoyée", badge: "Invité" },
+          { title: "Benoît", meta: "Invité sans compte · ajouté par l’organisateur", badge: "Invité" },
         ],
       },
-      { type: "info", text: "Les participants refusés ne sont pas comptés dans le nombre de joueurs." },
+      { type: "helpBox", title: "Comment les participants sont prévenus ?", text: "Un membre du cercle peut recevoir une invitation à l’édition et répondre : participe, incertain ou refuse. Un invité sans compte est ajouté directement par l’organisateur." },
+      { type: "info", text: "Invités, confirmés et incertains comptent pour vérifier les jeux. Les refusés ne comptent pas." },
     ],
   },
   {
@@ -214,7 +310,7 @@ const pages = [
     subtitle: "Vue organisateur · Choix visuel",
     role: "organisateur",
     phase: "preparation",
-    nav: "Jeux",
+    nav: "Soirées",
     scroll: true,
     showBottomNav: true,
     blocks: [
@@ -237,11 +333,11 @@ const pages = [
     subtitle: "Vue organisateur · Préparation édition",
     role: "organisateur",
     phase: "preparation",
-    nav: "Cercles",
+    nav: "Soirées",
     scroll: true,
     showBottomNav: true,
     blocks: [
-      { type: "hero", title: "Dans quel ordre jouer ?", text: "Réorganise les mini-jeux pour garder une soirée fluide." },
+      { type: "hero", title: "Dans quel ordre jouer ?", text: "Réorganise les mini-jeux selon vos préférences." },
       {
         type: "orderedGames",
         games: [
@@ -256,34 +352,11 @@ const pages = [
     ],
   },
   {
-    title: "Matériel",
-    subtitle: "Vue organisateur · Checklist édition",
-    role: "organisateur",
-    phase: "preparation",
-    nav: "Cercles",
-    scroll: true,
-    showBottomNav: true,
-    blocks: [
-      { type: "hero", title: "Checklist matériel", text: "Liste générée automatiquement depuis les jeux sélectionnés." },
-      {
-        type: "materialList",
-        items: [
-          { title: "Gobelets", meta: "25 nécessaires · réutilisable", note: "Dans le placard du garage", checked: true },
-          { title: "Feuilles papier", meta: "30 nécessaires · consommable", note: "Prévoir un paquet complet", checked: true },
-          { title: "Feutres", meta: "8 nécessaires · réutilisable", note: "", checked: false },
-          { title: "Chronomètre", meta: "1 nécessaire · réutilisable", note: "Téléphone possible si besoin", checked: false },
-        ],
-      },
-      { type: "info", text: "Les quantités sont fusionnées selon les jeux choisis." },
-      { type: "primary", action: "Valider le matériel" },
-    ],
-  },
-  {
     title: "Récompenses",
     subtitle: "Vue organisateur · Lots de l’édition",
     role: "organisateur",
     phase: "preparation",
-    nav: "Cercles",
+    nav: "Soirées",
     scroll: true,
     showBottomNav: true,
     blocks: [
@@ -302,11 +375,34 @@ const pages = [
     ],
   },
   {
+    title: "Matériel",
+    subtitle: "Vue organisateur · Checklist édition",
+    role: "organisateur",
+    phase: "preparation",
+    nav: "Soirées",
+    scroll: true,
+    showBottomNav: true,
+    blocks: [
+      { type: "hero", title: "Checklist matériel", text: "Dernière vérification avant lancement. La liste vient des jeux sélectionnés." },
+      {
+        type: "materialList",
+        items: [
+          { title: "Gobelets", meta: "25 nécessaires · réutilisable", note: "Dans le placard du garage", checked: true },
+          { title: "Feuilles papier", meta: "30 nécessaires · consommable", note: "Prévoir un paquet complet", checked: true },
+          { title: "Feutres", meta: "8 nécessaires · réutilisable", note: "", checked: false },
+          { title: "Chronomètre", meta: "1 nécessaire · réutilisable", note: "Téléphone possible si besoin", checked: false },
+        ],
+      },
+      { type: "info", text: "Les quantités sont fusionnées selon les jeux choisis." },
+      { type: "primary", action: "Valider le matériel" },
+    ],
+  },
+  {
     title: "Validation",
     subtitle: "Vue organisateur · Avant lancement",
     role: "organisateur",
     phase: "preparation",
-    nav: "Cercles",
+    nav: "Soirées",
     scroll: true,
     showBottomNav: true,
     blocks: [
@@ -316,20 +412,12 @@ const pages = [
         items: [
           { title: "Participants", meta: "7 prévus · minimum atteint", status: "OK" },
           { title: "Mini-jeux", meta: "10 jeux sélectionnés", status: "OK" },
-          { title: "Matériel", meta: "10 / 14 éléments cochés", status: "Alerte" },
           { title: "Récompenses", meta: "4 récompenses prévues", status: "OK" },
+          { title: "Matériel", meta: "10 / 14 éléments cochés", status: "Alerte" },
         ],
       },
-      {
-        type: "helpBox",
-        title: "Que signifie lancer la soirée ?",
-        text: "L’édition passe en cours, le live devient visible et le premier jeu démarre. Le matériel incomplet ne bloque pas, mais reste signalé.",
-      },
-      {
-        type: "warning",
-        title: "Matériel incomplet",
-        text: "Tu peux lancer la soirée, mais certains éléments ne sont pas encore cochés.",
-      },
+      { type: "helpBox", title: "Que signifie lancer la soirée ?", text: "L’édition passe en cours, le live s’active et le premier mini-jeu devient le jeu actuel." },
+      { type: "warning", title: "Matériel incomplet", text: "Tu peux lancer la soirée, mais certains éléments ne sont pas encore cochés." },
       { type: "primary", action: "Lancer la soirée" },
     ],
   },
@@ -338,7 +426,7 @@ const pages = [
     subtitle: "Vue organisateur · Soirée en cours",
     role: "organisateur",
     phase: "live",
-    nav: "Cercles",
+    nav: "Soirées",
     scroll: false,
     showBottomNav: false,
     blocks: [
@@ -347,10 +435,11 @@ const pages = [
         type: "dark",
         title: "Jeu actuel",
         lines: ["Blind test", "Jeu 1 sur 10", "15 min · plus haut score gagne"],
-        action: "Voir le jeu",
+        action: "Ouvrir le jeu actuel",
       },
-      { type: "liveActions", actions: ["Saisir résultats", "Gérer participants", "Écran TV", "Jeu suivant"] },
+      { type: "liveActions", actions: ["Gérer participants", "Écran TV", "Live joueur"] },
       { type: "summary", text: "Classement général : en attente des premiers résultats" },
+      { type: "helpBox", title: "Déroulé", text: "Les résultats se saisissent depuis la vue du jeu actuel. Après validation, l’application passe au jeu suivant." },
     ],
   },
   {
@@ -358,27 +447,31 @@ const pages = [
     subtitle: "Vue organisateur · Pendant la soirée",
     role: "organisateur",
     phase: "live",
-    nav: "Cercles",
+    nav: "Soirées",
     scroll: true,
     showBottomNav: false,
     blocks: [
       { type: "hero", title: "Blind test", text: "Jeu 1 sur 10 · plus haut score gagne" },
       {
-        type: "gameRules",
-        title: "Règles rapides",
-        lines: [
-          "Chaque joueur répond aux extraits musicaux.",
-          "1 bonne réponse = 1 point brut.",
-          "Le meilleur score gagne le mini-jeu.",
+        type: "section",
+        title: "Matériel rapide",
+        cards: [
+          { title: "Téléphone ou enceinte", meta: "1 nécessaire · prêt", badge: "OK" },
+          { title: "Feuilles réponse", meta: "1 par joueur · à distribuer", badge: "À faire" },
         ],
       },
       {
-        type: "section",
-        title: "Participants concernés",
-        cards: [
-          { title: "Julie", meta: "Présente", badge: "OK" },
-          { title: "Micka", meta: "Présent", badge: "OK" },
-          { title: "Benoît", meta: "En attente", badge: "À confirmer" },
+        type: "gameRules",
+        title: "Règles rapides",
+        lines: ["Chaque joueur répond aux extraits musicaux.", "1 bonne réponse = 1 score brut.", "Le plus haut score gagne le mini-jeu."],
+      },
+      {
+        type: "gameRules",
+        title: "Système de points",
+        lines: [
+          "L’app peut gérer un score simple, plusieurs essais ou un classement manuel.",
+          "Pour un jeu par élimination, l’organisateur renseigne le classement final.",
+          "Les points gagnés alimentent ensuite le classement général.",
         ],
       },
       { type: "primary", action: "Saisir les résultats" },
@@ -389,31 +482,27 @@ const pages = [
     subtitle: "Vue organisateur · Fin d’un mini-jeu",
     role: "organisateur",
     phase: "live",
-    nav: "Cercles",
+    nav: "Soirées",
     scroll: true,
     showBottomNav: false,
     blocks: [
-      { type: "hero", title: "Résultats · Blind test", text: "Saisis les scores bruts. L’application propose le classement." },
+      { type: "hero", title: "Résultats · Blind test", text: "Saisis les scores bruts ou le classement selon le type de jeu." },
+      { type: "actions", title: "Raccourci", actions: ["Retour aux règles du jeu"] },
       {
-        type: "scoreEntry",
+        type: "scoreEntryAdvanced",
         players: [
-          { name: "Julie", score: "8", status: "Joué" },
-          { name: "Micka", score: "6", status: "Joué" },
-          { name: "Lenny", score: "5", status: "Joué" },
-          { name: "Benoît", score: "", status: "Non joué" },
+          { name: "Julie", scores: ["3", "2", "3"], total: "8", status: "Joué" },
+          { name: "Micka", scores: ["2", "2", "2"], total: "6", status: "Joué" },
+          { name: "Lenny", scores: ["1", "2", "2"], total: "5", status: "Joué" },
+          { name: "Benoît", scores: ["-", "-", "-"], total: "-", status: "Non joué" },
         ],
       },
       {
         type: "rankingPreview",
-        title: "Classement proposé",
-        rows: [
-          "1. Julie · 8 points bruts",
-          "2. Micka · 6 points bruts",
-          "3. Lenny · 5 points bruts",
-          "Benoît · non joué",
-        ],
+        title: "Classement actuel du jeu",
+        rows: ["1. Julie · score brut total 8", "2. Micka · score brut total 6", "3. Lenny · score brut total 5", "Benoît · non joué"],
       },
-      { type: "info", text: "Le classement général ne sera mis à jour qu’après validation." },
+      { type: "info", text: "Après validation, l’application calcule les points classement et passe au jeu suivant." },
       { type: "primary", action: "Valider les résultats" },
     ],
   },
@@ -422,51 +511,41 @@ const pages = [
     subtitle: "Vue joueur · Soirée en cours",
     role: "membre",
     phase: "live",
-    nav: "Cercles",
+    nav: "Soirées",
     scroll: true,
     showBottomNav: true,
     blocks: [
-      { type: "hero", title: "Noël famille 2026", text: "Soirée en cours · Jeu 1 sur 10" },
+      { type: "hero", title: "Noël famille 2026", text: "Vue joueur · soirée en cours" },
       {
         type: "dark",
         title: "Jeu actuel",
-        lines: ["Blind test", "Plus haut score gagne", "Résultats en cours de saisie"],
-        action: "Voir les règles",
+        lines: ["Blind test", "Jeu 1 sur 10", "Plus haut score gagne"],
+        action: "Voir règles du jeu actuel",
       },
-      {
-        type: "rankingPreview",
-        title: "Classement live",
-        rows: ["Aucun résultat validé pour le moment", "Le classement apparaîtra après validation"],
-      },
+      { type: "rankingPreview", title: "Classement général live", rows: ["1. Julie · 18 pts classement", "2. Micka · 15 pts classement", "3. Lenny · 11 pts classement"] },
       {
         type: "section",
-        title: "Jeux précédents",
-        cards: [{ title: "Aucun jeu terminé", meta: "La soirée vient de commencer", badge: "En attente" }],
+        title: "Repères rapides",
+        cards: [
+          { title: "Jeu précédent", meta: "Aucun pour le moment", badge: "Début" },
+          { title: "Prochain jeu", meta: "Défi puzzle · 20 min", badge: "À venir" },
+        ],
       },
     ],
   },
   {
-    title: "Résultats jeu",
-    subtitle: "Vue joueur · Mini-jeu terminé",
+    title: "Live joueur détaillé",
+    subtitle: "Vue joueur · Détails de soirée",
     role: "membre",
     phase: "live",
-    nav: "Cercles",
+    nav: "Soirées",
     scroll: true,
     showBottomNav: true,
     blocks: [
-      { type: "hero", title: "Blind test terminé", text: "Scores bruts, rang et points gagnés sont conservés." },
-      {
-        type: "rankingPreview",
-        title: "Résultat du mini-jeu",
-        rows: [
-          "1. Julie · score brut 8 · +5 pts classement",
-          "2. Micka · score brut 6 · +3 pts classement",
-          "3. Lenny · score brut 5 · +1 pt classement",
-          "Benoît · non joué · 0 pt classement",
-        ],
-      },
-      { type: "summary", text: "Le classement général a été mis à jour après validation." },
-      { type: "primary", action: "Voir le classement général" },
+      { type: "hero", title: "Détail live", text: "Consulte les règles du jeu actuel, le classement général et les derniers résultats." },
+      { type: "gameRules", title: "Jeu actuel · Blind test", lines: ["Plus haut score gagne.", "Les résultats seront visibles après validation par l’organisateur."] },
+      { type: "rankingPreview", title: "Dernier résultat validé", rows: ["Aucun jeu terminé pour le moment", "Les scores bruts apparaîtront ici après validation"] },
+      { type: "primary", action: "Retour au live" },
     ],
   },
   {
@@ -474,20 +553,11 @@ const pages = [
     subtitle: "Vue organisateur · Pendant la soirée",
     role: "organisateur",
     phase: "live",
-    nav: "Cercles",
+    nav: "Soirées",
     scroll: true,
     showBottomNav: false,
     blocks: [
-      {
-        type: "hero",
-        title: "Participants en direct",
-        text: "Gère les absences, retards, départs ou invités ajoutés en cours.",
-      },
-      {
-        type: "helpBox",
-        title: "À quoi servent ces statuts ?",
-        text: "Absent = ne joue pas le jeu concerné. Parti = garde ses points déjà gagnés, mais ne joue plus les jeux suivants. Forfait = classé dernier sur le jeu en cours.",
-      },
+      { type: "hero", title: "Participants en direct", text: "Gère les absences, retards, départs ou invités ajoutés en cours." },
       {
         type: "participantLiveList",
         players: [
@@ -497,6 +567,7 @@ const pages = [
           { name: "Lenny", meta: "Parti · garde ses points déjà gagnés", status: "Parti" },
         ],
       },
+      { type: "helpBox", title: "À quoi servent ces statuts ?", text: "Absent = ne joue pas le jeu concerné. Parti = garde ses points déjà gagnés, mais ne joue plus les jeux suivants. Forfait = classé dernier sur le jeu en cours." },
       { type: "actions", title: "Actions", actions: ["Ajouter un invité", "Marquer absent", "Marquer parti"] },
     ],
   },
@@ -505,7 +576,7 @@ const pages = [
     subtitle: "Vue organisateur · Fin de soirée",
     role: "organisateur",
     phase: "live",
-    nav: "Cercles",
+    nav: "Soirées",
     scroll: true,
     showBottomNav: false,
     blocks: [
@@ -519,16 +590,8 @@ const pages = [
           { title: "Égalités", meta: "Aucune égalité à départager", status: "OK" },
         ],
       },
-      {
-        type: "helpBox",
-        title: "Que se passe-t-il à la clôture ?",
-        text: "Les résultats sont figés, le podium final est généré et l’édition passe dans l’historique. Après clôture, une correction devra être exceptionnelle.",
-      },
-      {
-        type: "warning",
-        title: "Résultats bientôt verrouillés",
-        text: "Après clôture, les corrections devront passer par une demande exceptionnelle.",
-      },
+      { type: "helpBox", title: "Que se passe-t-il à la clôture ?", text: "Les résultats sont figés, le podium final est généré et l’édition passe dans l’historique. Après clôture, une correction devra être exceptionnelle." },
+      { type: "warning", title: "Résultats bientôt verrouillés", text: "Après clôture, les corrections devront passer par une demande exceptionnelle." },
       { type: "primary", action: "Clôturer l’édition" },
     ],
   },
@@ -537,7 +600,7 @@ const pages = [
     subtitle: "Vue joueur · Édition clôturée",
     role: "membre",
     phase: "post",
-    nav: "Cercles",
+    nav: "Soirées",
     scroll: true,
     showBottomNav: true,
     blocks: [
@@ -562,13 +625,13 @@ const pages = [
     scroll: true,
     showBottomNav: true,
     blocks: [
-      { type: "hero", title: "Historique du cercle", text: "Retrouve les anciennes soirées, podiums et résultats." },
+      { type: "hero", title: "Historique du cercle", text: "Entre dans une édition clôturée pour voir le podium, les scores et les détails." },
       {
         type: "section",
         title: "Éditions clôturées",
         cards: [
-          { title: "Noël famille 2026", meta: "24 décembre · 7 participants · 10 jeux", badge: "Clôturée", action: "Voir" },
-          { title: "Anniversaire Julie", meta: "12 octobre · 6 participants · 8 jeux", badge: "Clôturée", action: "Voir" },
+          { title: "Noël famille 2026", meta: "24 décembre · 7 participants · 10 jeux", badge: "Clôturée", action: "Voir résultats" },
+          { title: "Anniversaire Julie", meta: "12 octobre · 6 participants · 8 jeux", badge: "Clôturée", action: "Voir résultats" },
         ],
       },
       { type: "summary", text: "Les éditions annulées ne sont pas comptées comme soirées jouées." },
@@ -584,10 +647,15 @@ const pages = [
     showBottomNav: true,
     blocks: [
       { type: "hero", title: "Noël famille 2026", text: "Résultats complets · édition clôturée" },
+      { type: "rankingPreview", title: "Classement final", rows: ["1. Julie · 42 pts classement", "2. Micka · 36 pts classement", "3. Lenny · 31 pts classement", "4. Benoît · 18 pts classement"] },
       {
-        type: "rankingPreview",
-        title: "Classement final",
-        rows: ["1. Julie · 42 pts classement", "2. Micka · 36 pts classement", "3. Lenny · 31 pts classement", "4. Benoît · 18 pts classement"],
+        type: "section",
+        title: "Explorer l’édition",
+        cards: [
+          { title: "Tous les mini-jeux", meta: "Scores bruts, rangs et points par jeu", badge: "Détail", action: "Ouvrir" },
+          { title: "Mes performances", meta: "Tes scores dans cette édition", badge: "Perso", action: "Voir" },
+          { title: "Comparer joueurs", meta: "Comparer les résultats de l’édition", badge: "Stats", action: "Comparer" },
+        ],
       },
       {
         type: "section",
@@ -631,7 +699,16 @@ const pages = [
     scroll: true,
     showBottomNav: true,
     blocks: [
-      { type: "hero", title: "Stats du cercle", text: "Vue rapide des performances dans Famille & amis." },
+      { type: "hero", title: "Stats du cercle", text: "Choisis une entrée : classement, joueurs, éditions ou mini-jeux." },
+      {
+        type: "gridDetailed",
+        items: [
+          { title: "Classement all-time", text: "Points cumulés" },
+          { title: "Joueurs", text: "Stats individuelles" },
+          { title: "Éditions", text: "Historique détaillé" },
+          { title: "Mini-jeux", text: "Scores bruts par jeu" },
+        ],
+      },
       {
         type: "statsGrid",
         stats: [
@@ -660,14 +737,18 @@ const pages = [
           { label: "Éditions jouées", value: "8" },
           { label: "Total points", value: "284" },
           { label: "Podiums", value: "5" },
-          { label: "Mini-jeux gagnés", value: "14" },
+          { label: "Lots gagnés", value: "3" },
         ],
       },
       {
-        type: "rankingPreview",
-        title: "Meilleurs scores bruts",
-        rows: ["Blind test · meilleur score 9", "Défi puzzle · meilleur temps 42s", "Quiz famille · meilleur score 12"],
+        type: "section",
+        title: "Récompenses",
+        cards: [
+          { title: "2e place", meta: "Noël famille 2026 · 2 jeux à gratter", badge: "Lot" },
+          { title: "3e place", meta: "Anniversaire Julie · 1 jeu à gratter", badge: "Lot" },
+        ],
       },
+      { type: "rankingPreview", title: "Meilleurs scores bruts", rows: ["Blind test · meilleur score 9", "Défi puzzle · meilleur temps 42s", "Quiz famille · meilleur score 12"] },
     ],
   },
   {
@@ -721,15 +802,7 @@ const pages = [
     showBottomNav: true,
     blocks: [
       { type: "hero", title: "Blind test", text: "Mini-jeu officiel · 15 min · 3–12 joueurs" },
-      {
-        type: "gameRules",
-        title: "Règles",
-        lines: [
-          "L’organisateur lance des extraits musicaux.",
-          "Chaque bonne réponse donne 1 point brut.",
-          "Le plus haut score gagne le mini-jeu.",
-        ],
-      },
+      { type: "gameRules", title: "Règles", lines: ["L’organisateur lance des extraits musicaux.", "Chaque bonne réponse donne 1 point brut.", "Le plus haut score gagne le mini-jeu."] },
       {
         type: "section",
         title: "Matériel nécessaire",
@@ -802,11 +875,7 @@ const pages = [
           { title: "Défi objets mystères", meta: "Proposé anonymement · 15 min", badge: "À modifier", action: "Voir" },
         ],
       },
-      {
-        type: "helpBox",
-        title: "Que peut faire l’organisateur ?",
-        text: "Il peut accepter, refuser, demander une modification ou corriger lui-même avant validation.",
-      },
+      { type: "helpBox", title: "Que peut faire l’organisateur ?", text: "Il peut accepter, refuser, demander une modification ou corriger lui-même avant validation." },
     ],
   },
   {
@@ -819,15 +888,7 @@ const pages = [
     showBottomNav: true,
     blocks: [
       { type: "hero", title: "Quiz famille", text: "Proposition de mini-jeu · statut en attente" },
-      {
-        type: "gameRules",
-        title: "Règles proposées",
-        lines: [
-          "Chaque joueur répond à une question sur la famille.",
-          "1 bonne réponse = 1 score brut.",
-          "Le plus haut score gagne le mini-jeu.",
-        ],
-      },
+      { type: "gameRules", title: "Règles proposées", lines: ["Chaque joueur répond à une question sur la famille.", "1 bonne réponse = 1 score brut.", "Le plus haut score gagne le mini-jeu."] },
       {
         type: "section",
         title: "Informations",
@@ -850,15 +911,7 @@ const pages = [
     showBottomNav: true,
     blocks: [
       { type: "hero", title: "Quiz famille", text: "Mini-jeu du cercle · créé pour Famille & amis" },
-      {
-        type: "gameRules",
-        title: "Règles",
-        lines: [
-          "Questions personnalisées sur les membres du cercle.",
-          "Chaque bonne réponse donne 1 point brut.",
-          "Le plus haut score gagne le mini-jeu.",
-        ],
-      },
+      { type: "gameRules", title: "Règles", lines: ["Questions personnalisées sur les membres du cercle.", "Chaque bonne réponse donne 1 point brut.", "Le plus haut score gagne le mini-jeu."] },
       {
         type: "section",
         title: "Matériel",
@@ -880,16 +933,8 @@ const pages = [
     showBottomNav: true,
     blocks: [
       { type: "hero", title: "Proposer au catalogue officiel", text: "Le jeu du cercle sera envoyé à l’admin global pour validation." },
-      {
-        type: "section",
-        title: "Jeu concerné",
-        cards: [{ title: "Quiz famille", meta: "Jeu du cercle Famille & amis", badge: "Cercle" }],
-      },
-      {
-        type: "helpBox",
-        title: "Important",
-        text: "Si le jeu est accepté, une version officielle propre sera créée. Le jeu du cercle d’origine ne sera pas écrasé.",
-      },
+      { type: "section", title: "Jeu concerné", cards: [{ title: "Quiz famille", meta: "Jeu du cercle Famille & amis", badge: "Cercle" }] },
+      { type: "helpBox", title: "Important", text: "Si le jeu est accepté, une version officielle propre sera créée. Le jeu du cercle d’origine ne sera pas écrasé." },
       { type: "primary", action: "Envoyer la proposition officielle" },
     ],
   },
@@ -965,20 +1010,8 @@ const pages = [
     showBottomNav: false,
     blocks: [
       { type: "hero", title: "Quiz famille", text: "Proposition officielle à examiner." },
-      {
-        type: "gameRules",
-        title: "Règles proposées",
-        lines: [
-          "Chaque joueur répond à une question personnalisée.",
-          "L’admin doit généraliser les règles si elles sont trop spécifiques.",
-          "Le plus haut score gagne.",
-        ],
-      },
-      {
-        type: "helpBox",
-        title: "Après acceptation",
-        text: "Une version officielle propre sera créée dans le catalogue officiel. Le jeu du cercle reste inchangé.",
-      },
+      { type: "gameRules", title: "Règles proposées", lines: ["Chaque joueur répond à une question personnalisée.", "L’admin doit généraliser les règles si elles sont trop spécifiques.", "Le plus haut score gagne."] },
+      { type: "helpBox", title: "Après acceptation", text: "Une version officielle propre sera créée dans le catalogue officiel. Le jeu du cercle reste inchangé." },
       { type: "decisionActions", actions: ["Accepter", "Demander modification", "Refuser"] },
     ],
   },
@@ -1030,7 +1063,7 @@ const tvScreens = [
         generalRows: ["1. Julie · 18 pts", "2. Micka · 15 pts", "3. Lenny · 11 pts"],
         gameRows: ["1. Micka · score brut 6", "2. Julie · score brut 5", "3. Lenny · score brut 3"],
       },
-      { type: "tvStatus", items: ["Jeux faits : 3", "Jeux restants : 6", "Prochain jeu : Dessin", "Résultats du jeu : en cours"] },
+      { type: "tvStatus", items: ["Jeux faits : 3", "Jeux restants : 6", "Prochain jeu : Dessin", "Résultats : en cours"] },
     ],
   },
   {
@@ -1038,19 +1071,7 @@ const tvScreens = [
     subtitle: "Vue publique · Édition clôturée",
     blocks: [
       { type: "tvHero", title: "Podium final", text: "Noël famille 2026 · édition clôturée" },
-      {
-        type: "tvGameProgress",
-        done: 10,
-        total: 10,
-        games: [
-          { name: "Quiz", status: "done" },
-          { name: "Puzzle", status: "done" },
-          { name: "Mime", status: "done" },
-          { name: "Blind test", status: "done" },
-          { name: "Dessin", status: "done" },
-          { name: "Défi final", status: "done" },
-        ],
-      },
+      { type: "tvCelebration", title: "Bravo Julie !", text: "Grande gagnante de Noël famille 2026" },
       {
         type: "tvRanking",
         title: "Top 3",
@@ -1074,7 +1095,7 @@ const PHASES = [
   {
     id: "preparation",
     label: "02 · Préparation d’édition",
-    description: "Création de soirée, participants, jeux, matériel, récompenses et validation.",
+    description: "Création de soirée, participants, jeux, ordre, récompenses, matériel et validation.",
   },
   {
     id: "live",
@@ -1084,7 +1105,7 @@ const PHASES = [
   {
     id: "post",
     label: "04 · Après-soirée & statistiques",
-    description: "Podium, historique, résultats, scores bruts et comparaisons.",
+    description: "Podium, historique, résultats, scores bruts, récompenses et comparaisons.",
   },
   {
     id: "catalogue",
@@ -1114,12 +1135,19 @@ const ROLE_STYLES = {
   admin: "bg-rose-100 text-rose-900 border-rose-300",
 };
 
+function roleLabel(role) {
+  if (role === "organisateur") return "Vue organisateur";
+  if (role === "membre") return "Vue joueur / membre";
+  if (role === "admin") return "Vue admin";
+  return "Vue utilisateur";
+}
+
 function Phone({ page }) {
   return (
     <div className="space-y-2">
       <div className="text-center space-y-1">
-        <span className={`inline-flex items-center justify-center rounded-full border px-2 py-0.5 text-[9px] font-black uppercase tracking-wide ${ROLE_STYLES[page.role] || ROLE_STYLES.utilisateur}`}>
-          {page.role}
+        <span className={`inline-flex items-center justify-center rounded-full border px-2 py-0.5 text-[9px] font-black uppercase tracking-wide ${ROLE_STYLES[page.role]}`}>
+          {roleLabel(page.role)}
         </span>
 
         <p className="text-[10px] uppercase tracking-wide text-neutral-700 font-bold">
@@ -1148,11 +1176,13 @@ function Phone({ page }) {
           </main>
 
           {page.showBottomNav && (
-            <footer className="h-12 bg-white border-t border-neutral-300 grid grid-cols-4 text-[8px] text-neutral-500 shrink-0">
-              {["Accueil", "Cercles", "Jeux", "Profil"].map((item) => (
+            <footer className="h-12 bg-white border-t border-neutral-300 grid grid-cols-5 text-[8px] text-neutral-500 shrink-0">
+              {["Accueil", "Cercles", "Soirées", "Jeux", "Profil"].map((item) => (
                 <div
                   key={item}
-                  className={`flex flex-col items-center justify-center gap-0.5 ${page.nav === item ? "font-bold text-neutral-950" : ""}`}
+                  className={`flex flex-col items-center justify-center gap-0.5 ${
+                    page.nav === item ? "font-bold text-neutral-950" : ""
+                  }`}
                 >
                   <span>{page.nav === item ? "●" : "○"}</span>
                   <span>{item}</span>
@@ -1188,9 +1218,13 @@ function Block({ block }) {
     return (
       <section className="rounded-2xl bg-neutral-900 text-white p-3">
         <p className="text-sm font-bold mb-1">{block.title}</p>
+
         {block.lines.map((line, index) => (
-          <p key={index} className="text-[10px] text-neutral-200">{line}</p>
+          <p key={index} className="text-[10px] text-neutral-200">
+            {line}
+          </p>
         ))}
+
         <button className="mt-3 w-full h-9 rounded-xl bg-white text-neutral-950 text-[11px] font-bold">
           {block.action}
         </button>
@@ -1202,8 +1236,11 @@ function Block({ block }) {
     return (
       <section className="rounded-2xl bg-white border border-neutral-300 p-3">
         <p className="text-sm font-bold mb-2 text-black">{block.title}</p>
+
         <div className="space-y-2">
-          {block.cards.map((card, index) => <MiniCard key={index} {...card} />)}
+          {block.cards.map((card, index) => (
+            <MiniCard key={index} {...card} />
+          ))}
         </div>
       </section>
     );
@@ -1213,9 +1250,13 @@ function Block({ block }) {
     return (
       <section className="rounded-2xl bg-white border border-neutral-300 p-3">
         <p className="text-sm font-bold mb-2 text-black">{block.title}</p>
+
         <div className="space-y-2">
           {block.actions.map((action) => (
-            <button key={action} className="w-full h-9 rounded-xl border border-neutral-400 bg-white text-[11px] font-bold text-black">
+            <button
+              key={action}
+              className="w-full h-9 rounded-xl border border-neutral-400 bg-white text-[11px] font-bold text-neutral-900"
+            >
               {action}
             </button>
           ))}
@@ -1228,6 +1269,7 @@ function Block({ block }) {
     return (
       <section className="rounded-2xl bg-white border border-neutral-300 p-3 flex gap-3 items-center">
         <div className="w-12 h-12 rounded-2xl bg-neutral-300" />
+
         <div>
           <p className="text-lg font-black leading-tight text-black">{block.title}</p>
           <p className="text-[11px] text-neutral-600">{block.text}</p>
@@ -1240,6 +1282,7 @@ function Block({ block }) {
     return (
       <section className="rounded-2xl bg-white border border-neutral-300 p-3 flex items-center gap-3">
         <div className="w-14 h-14 rounded-full bg-neutral-300 shrink-0" />
+
         <div className="min-w-0">
           <p className="text-lg font-black text-black leading-tight">{block.name}</p>
           <p className="text-[10px] text-neutral-600 mt-1">{block.meta}</p>
@@ -1252,8 +1295,11 @@ function Block({ block }) {
     return (
       <div className="grid grid-cols-2 gap-2">
         {block.items.map((item) => (
-          <button key={item.title} className="h-20 rounded-2xl bg-white border border-neutral-300 p-2 text-left">
-            <p className="text-xs font-black text-black">{item.title}</p>
+          <button
+            key={item.title}
+            className="h-20 rounded-2xl bg-white border border-neutral-300 p-2 text-left"
+          >
+            <p className="text-xs font-black text-neutral-950">{item.title}</p>
             <p className="text-[9px] text-neutral-600 mt-1">{item.text}</p>
           </button>
         ))}
@@ -1265,11 +1311,12 @@ function Block({ block }) {
     return (
       <section className="rounded-2xl bg-white border border-neutral-300 p-3">
         <p className="text-sm font-bold mb-2 text-black">{block.title}</p>
+
         <div className="space-y-2">
           {block.fields.map((field) => (
             <label key={field} className="block">
               <span className="text-[10px] font-semibold text-neutral-700">{field}</span>
-              <div className={`${field.includes("Description") || field.includes("Règles") || field.includes("Matériel") ? "h-16" : "h-9"} rounded-xl border border-neutral-300 bg-neutral-100 mt-1`} />
+              <div className={`${field.includes("Description") || field.includes("Règles") ? "h-16" : "h-9"} rounded-xl border border-neutral-300 bg-neutral-100 mt-1`} />
             </label>
           ))}
         </div>
@@ -1289,15 +1336,31 @@ function Block({ block }) {
     return (
       <section className="rounded-2xl bg-white border border-neutral-300 p-3">
         <p className="text-sm font-bold mb-2 text-black">Étapes de préparation</p>
+
         <div className="space-y-2">
           {block.steps.map((step, index) => (
-            <div key={step.title} className="flex items-center gap-2 rounded-xl bg-neutral-50 border border-neutral-200 p-2">
-              <span className="w-5 h-5 rounded-full bg-neutral-900 text-white text-[9px] flex items-center justify-center shrink-0">{index + 1}</span>
+            <div
+              key={step.title}
+              className="flex items-center gap-2 rounded-xl bg-neutral-50 border border-neutral-200 p-2"
+            >
+              <span className={`w-6 h-6 rounded-full text-[10px] flex items-center justify-center shrink-0 ${
+                step.status === "Validé"
+                  ? "bg-emerald-700 text-white"
+                  : step.status === "À finir"
+                  ? "bg-amber-500 text-white"
+                  : "bg-neutral-300 text-neutral-700"
+              }`}>
+                {step.status === "Validé" ? "✓" : index + 1}
+              </span>
+
               <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-bold text-black">{step.title}</p>
+                <p className="text-[11px] font-bold text-neutral-950">{step.title}</p>
                 <p className="text-[9px] text-neutral-600">{step.meta}</p>
               </div>
-              <span className="text-[8px] px-2 py-1 rounded-full bg-neutral-200 text-neutral-800 whitespace-nowrap">{step.status}</span>
+
+              <span className="text-[8px] px-2 py-1 rounded-full bg-neutral-200 text-neutral-800 whitespace-nowrap">
+                {step.status}
+              </span>
             </div>
           ))}
         </div>
@@ -1306,7 +1369,20 @@ function Block({ block }) {
   }
 
   if (block.type === "info") {
-    return <div className="rounded-xl bg-neutral-200 border border-neutral-300 p-3 text-[10px] text-neutral-800">{block.text}</div>;
+    return (
+      <div className="rounded-xl bg-neutral-200 border border-neutral-300 p-3 text-[10px] text-neutral-800">
+        {block.text}
+      </div>
+    );
+  }
+
+  if (block.type === "helpBox") {
+    return (
+      <div className="rounded-2xl bg-white border border-dashed border-neutral-400 p-3">
+        <p className="text-[12px] font-black text-black">? {block.title}</p>
+        <p className="text-[10px] text-neutral-700 mt-1">{block.text}</p>
+      </div>
+    );
   }
 
   if (block.type === "warning") {
@@ -1318,20 +1394,16 @@ function Block({ block }) {
     );
   }
 
-  if (block.type === "helpBox") {
-    return (
-      <div className="rounded-2xl bg-white border border-dashed border-neutral-500 p-3">
-        <p className="text-[12px] font-black text-black">? {block.title}</p>
-        <p className="text-[10px] text-neutral-700 mt-1">{block.text}</p>
-      </div>
-    );
-  }
-
   if (block.type === "filters") {
     return (
       <div className="flex gap-2 overflow-hidden">
         {block.items.map((item) => (
-          <button key={item} className="shrink-0 px-3 h-8 rounded-full bg-white border border-neutral-300 text-[10px] font-bold text-black">{item}</button>
+          <button
+            key={item}
+            className="shrink-0 px-3 h-8 rounded-full bg-white border border-neutral-300 text-[10px] font-bold text-neutral-900"
+          >
+            {item}
+          </button>
         ))}
       </div>
     );
@@ -1341,16 +1413,26 @@ function Block({ block }) {
     return (
       <section className="space-y-2">
         <p className="text-sm font-bold text-black">Mini-jeux disponibles</p>
+
         <div className="flex gap-3 overflow-x-auto pb-2">
           {block.cards.map((card) => (
-            <div key={card.title} className={`w-36 shrink-0 rounded-2xl border p-2 ${card.badge === "Grisé" ? "bg-neutral-200 border-neutral-300 opacity-70" : "bg-white border-neutral-300"}`}>
+            <div
+              key={card.title}
+              className={`w-36 shrink-0 rounded-2xl border p-2 ${
+                card.badge === "Grisé" ? "bg-neutral-200 border-neutral-300 opacity-70" : "bg-white border-neutral-300"
+              }`}
+            >
               <div className="h-20 rounded-xl bg-neutral-300 mb-2" />
               <div className="flex items-center justify-between gap-1">
-                <p className="text-[11px] font-black text-black truncate">{card.title}</p>
-                <span className="text-[8px] px-1.5 py-0.5 rounded-full bg-neutral-200 text-neutral-800 shrink-0">{card.badge}</span>
+                <p className="text-[11px] font-black text-neutral-950 truncate">{card.title}</p>
+                <span className="text-[8px] px-1.5 py-0.5 rounded-full bg-neutral-200 text-neutral-800 shrink-0">
+                  {card.badge}
+                </span>
               </div>
               <p className="text-[9px] text-neutral-600 mt-1 min-h-7">{card.meta}</p>
-              <button className="mt-2 w-full h-8 rounded-lg border border-neutral-400 bg-white text-[10px] font-bold text-black">{card.action}</button>
+              <button className="mt-2 w-full h-8 rounded-lg border border-neutral-400 bg-white text-[10px] font-bold text-neutral-900">
+                {card.action}
+              </button>
             </div>
           ))}
         </div>
@@ -1359,7 +1441,11 @@ function Block({ block }) {
   }
 
   if (block.type === "summary") {
-    return <div className="rounded-xl bg-white border border-neutral-300 p-3 text-[11px] font-bold text-neutral-900">{block.text}</div>;
+    return (
+      <div className="rounded-xl bg-white border border-neutral-300 p-3 text-[11px] font-bold text-neutral-900">
+        {block.text}
+      </div>
+    );
   }
 
   if (block.type === "orderedGames") {
@@ -1369,9 +1455,11 @@ function Block({ block }) {
         <div className="space-y-2">
           {block.games.map((game) => (
             <div key={game.order} className="flex items-center gap-2 rounded-xl bg-neutral-50 border border-neutral-200 p-2">
-              <span className="w-7 h-7 rounded-full bg-neutral-900 text-white text-[10px] font-bold flex items-center justify-center shrink-0">{game.order}</span>
+              <span className="w-7 h-7 rounded-full bg-neutral-900 text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                {game.order}
+              </span>
               <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-bold text-black">{game.title}</p>
+                <p className="text-[11px] font-bold text-neutral-950">{game.title}</p>
                 <p className="text-[9px] text-neutral-600">{game.meta}</p>
               </div>
               <span className="text-neutral-500 text-sm">↕</span>
@@ -1389,11 +1477,17 @@ function Block({ block }) {
         <div className="space-y-2">
           {block.items.map((item) => (
             <div key={item.title} className="flex items-start gap-2 rounded-xl bg-neutral-50 border border-neutral-200 p-2">
-              <span className={`mt-0.5 w-5 h-5 rounded-md border flex items-center justify-center text-[10px] shrink-0 ${item.checked ? "bg-neutral-900 text-white border-neutral-900" : "bg-white border-neutral-400 text-transparent"}`}>✓</span>
+              <span className={`mt-0.5 w-5 h-5 rounded-md border flex items-center justify-center text-[10px] shrink-0 ${item.checked ? "bg-neutral-900 text-white border-neutral-900" : "bg-white border-neutral-400 text-transparent"}`}>
+                ✓
+              </span>
               <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-bold text-black">{item.title}</p>
+                <p className="text-[11px] font-bold text-neutral-950">{item.title}</p>
                 <p className="text-[9px] text-neutral-600">{item.meta}</p>
-                {item.note && <p className="text-[9px] text-neutral-800 mt-1 rounded-lg bg-neutral-200 px-2 py-1">Note : {item.note}</p>}
+                {item.note && (
+                  <p className="text-[9px] text-neutral-800 mt-1 rounded-lg bg-neutral-200 px-2 py-1">
+                    Note : {item.note}
+                  </p>
+                )}
               </div>
             </div>
           ))}
@@ -1409,9 +1503,11 @@ function Block({ block }) {
         <div className="space-y-2">
           {block.rewards.map((reward, index) => (
             <div key={`${reward.rank}-${reward.title}-${index}`} className="flex items-center gap-2 rounded-xl bg-neutral-50 border border-neutral-200 p-2">
-              <span className="w-7 h-7 rounded-full bg-neutral-900 text-white text-[10px] font-bold flex items-center justify-center shrink-0">{reward.rank}</span>
+              <span className="w-7 h-7 rounded-full bg-neutral-900 text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                {reward.rank}
+              </span>
               <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-bold text-black">{reward.title}</p>
+                <p className="text-[11px] font-bold text-neutral-950">{reward.title}</p>
                 <p className="text-[9px] text-neutral-600">{reward.meta}</p>
               </div>
             </div>
@@ -1429,10 +1525,12 @@ function Block({ block }) {
           {block.items.map((item) => (
             <div key={item.title} className="flex items-center gap-2 rounded-xl bg-neutral-50 border border-neutral-200 p-2">
               <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-bold text-black">{item.title}</p>
+                <p className="text-[11px] font-bold text-neutral-950">{item.title}</p>
                 <p className="text-[9px] text-neutral-600">{item.meta}</p>
               </div>
-              <span className="text-[8px] px-2 py-1 rounded-full bg-neutral-200 text-neutral-800 whitespace-nowrap">{item.status}</span>
+              <span className="text-[8px] px-2 py-1 rounded-full bg-neutral-200 text-neutral-800 whitespace-nowrap">
+                {item.status}
+              </span>
             </div>
           ))}
         </div>
@@ -1446,7 +1544,9 @@ function Block({ block }) {
         <p className="text-sm font-bold mb-2 text-black">Actions soirée</p>
         <div className="grid grid-cols-2 gap-2">
           {block.actions.map((action) => (
-            <button key={action} className="h-14 rounded-2xl bg-neutral-50 border border-neutral-300 text-[10px] font-bold px-2 text-black">{action}</button>
+            <button key={action} className="h-14 rounded-2xl bg-neutral-50 border border-neutral-300 text-[10px] font-bold px-2 text-neutral-900">
+              {action}
+            </button>
           ))}
         </div>
       </section>
@@ -1458,24 +1558,37 @@ function Block({ block }) {
       <section className="rounded-2xl bg-white border border-neutral-300 p-3">
         <p className="text-sm font-bold mb-2 text-black">{block.title}</p>
         <div className="space-y-1">
-          {block.lines.map((line) => <p key={line} className="text-[10px] text-neutral-700">• {line}</p>)}
+          {block.lines.map((line) => (
+            <p key={line} className="text-[10px] text-neutral-700">• {line}</p>
+          ))}
         </div>
       </section>
     );
   }
 
-  if (block.type === "scoreEntry") {
+  if (block.type === "scoreEntryAdvanced") {
     return (
       <section className="rounded-2xl bg-white border border-neutral-300 p-3">
-        <p className="text-sm font-bold mb-2 text-black">Scores bruts</p>
+        <p className="text-sm font-bold mb-2 text-black">Saisie des scores</p>
         <div className="space-y-2">
           {block.players.map((player) => (
-            <div key={player.name} className="flex items-center gap-2 rounded-xl bg-neutral-50 border border-neutral-200 p-2">
-              <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-bold text-black">{player.name}</p>
-                <p className="text-[9px] text-neutral-600">Statut : {player.status}</p>
+            <div key={player.name} className="rounded-xl bg-neutral-50 border border-neutral-200 p-2">
+              <div className="flex items-center justify-between gap-2">
+                <div>
+                  <p className="text-[11px] font-bold text-neutral-950">{player.name}</p>
+                  <p className="text-[9px] text-neutral-600">Statut : {player.status}</p>
+                </div>
+                <div className="rounded-lg bg-neutral-900 text-white px-2 py-1 text-[10px] font-bold">
+                  Total {player.total}
+                </div>
               </div>
-              <div className="w-14 h-9 rounded-lg bg-white border border-neutral-300 flex items-center justify-center text-[11px] font-bold text-black">{player.score || "-"}</div>
+              <div className="grid grid-cols-3 gap-1 mt-2">
+                {player.scores.map((score, index) => (
+                  <div key={index} className="h-8 rounded-lg bg-white border border-neutral-300 flex items-center justify-center text-[10px] font-bold text-neutral-800">
+                    Essai {index + 1} : {score}
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
@@ -1489,7 +1602,9 @@ function Block({ block }) {
         <p className="text-sm font-bold mb-2 text-black">{block.title}</p>
         <div className="space-y-1">
           {block.rows.map((row) => (
-            <p key={row} className="rounded-lg bg-neutral-50 border border-neutral-200 px-2 py-1.5 text-[10px] text-neutral-800">{row}</p>
+            <p key={row} className="rounded-lg bg-neutral-50 border border-neutral-200 px-2 py-1.5 text-[10px] text-neutral-800">
+              {row}
+            </p>
           ))}
         </div>
       </section>
@@ -1504,10 +1619,12 @@ function Block({ block }) {
           {block.players.map((player) => (
             <div key={player.name} className="flex items-center gap-2 rounded-xl bg-neutral-50 border border-neutral-200 p-2">
               <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-bold text-black">{player.name}</p>
+                <p className="text-[11px] font-bold text-neutral-950">{player.name}</p>
                 <p className="text-[9px] text-neutral-600">{player.meta}</p>
               </div>
-              <span className="text-[8px] px-2 py-1 rounded-full bg-neutral-200 text-neutral-800 whitespace-nowrap">{player.status}</span>
+              <span className="text-[8px] px-2 py-1 rounded-full bg-neutral-200 text-neutral-800 whitespace-nowrap">
+                {player.status}
+              </span>
             </div>
           ))}
         </div>
@@ -1523,13 +1640,17 @@ function Block({ block }) {
           {block.winners.map((winner) => (
             <div key={winner.rank} className="rounded-xl bg-neutral-50 border border-neutral-200 p-2">
               <div className="flex items-center gap-2">
-                <span className="w-7 h-7 rounded-full bg-neutral-900 text-white text-[10px] font-bold flex items-center justify-center shrink-0">{winner.rank}</span>
+                <span className="w-7 h-7 rounded-full bg-neutral-900 text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                  {winner.rank}
+                </span>
                 <div className="min-w-0 flex-1">
-                  <p className="text-[11px] font-bold text-black">{winner.name}</p>
+                  <p className="text-[11px] font-bold text-neutral-950">{winner.name}</p>
                   <p className="text-[9px] text-neutral-600">{winner.points}</p>
                 </div>
               </div>
-              <p className="mt-2 text-[9px] text-neutral-800 rounded-lg bg-neutral-200 px-2 py-1">Lot : {winner.reward}</p>
+              <p className="mt-2 text-[9px] text-neutral-800 rounded-lg bg-neutral-200 px-2 py-1">
+                Lot : {winner.reward}
+              </p>
             </div>
           ))}
         </div>
@@ -1543,7 +1664,7 @@ function Block({ block }) {
         {block.stats.map((stat) => (
           <div key={stat.label} className="rounded-2xl bg-white border border-neutral-300 p-3">
             <p className="text-[9px] text-neutral-600">{stat.label}</p>
-            <p className="text-sm font-black text-black mt-1">{stat.value}</p>
+            <p className="text-sm font-black text-neutral-950 mt-1">{stat.value}</p>
           </div>
         ))}
       </section>
@@ -1556,7 +1677,7 @@ function Block({ block }) {
         <p className="text-sm font-bold mb-2 text-black">{block.title}</p>
         <div className="space-y-2">
           {block.choices.map((choice) => (
-            <div key={choice.title} className={`rounded-xl border p-2 ${choice.selected ? "bg-neutral-900 text-white border-neutral-900" : "bg-neutral-50 border-neutral-200 text-black"}`}>
+            <div key={choice.title} className={`rounded-xl border p-2 ${choice.selected ? "bg-neutral-900 text-white border-neutral-900" : "bg-neutral-50 border-neutral-200 text-neutral-950"}`}>
               <p className="text-[11px] font-bold">{choice.title}</p>
               <p className={`text-[9px] mt-1 ${choice.selected ? "text-neutral-200" : "text-neutral-600"}`}>{choice.meta}</p>
             </div>
@@ -1572,7 +1693,7 @@ function Block({ block }) {
         <p className="text-sm font-bold mb-2 text-black">Décision</p>
         <div className="space-y-2">
           {block.actions.map((action, index) => (
-            <button key={action} className={`w-full h-9 rounded-xl text-[11px] font-bold border ${index === 0 ? "bg-neutral-900 text-white border-neutral-900" : "bg-white text-black border-neutral-400"}`}>
+            <button key={action} className={`w-full h-9 rounded-xl text-[11px] font-bold border ${index === 0 ? "bg-neutral-900 text-white border-neutral-900" : "bg-white text-neutral-900 border-neutral-400"}`}>
               {action}
             </button>
           ))}
@@ -1586,10 +1707,12 @@ function Block({ block }) {
       <section className="grid grid-cols-2 gap-2">
         {block.players.map((player) => (
           <div key={player.name} className="rounded-2xl bg-white border border-neutral-300 p-3">
-            <p className="text-sm font-black text-black">{player.name}</p>
+            <p className="text-sm font-black text-neutral-950">{player.name}</p>
             <div className="space-y-1 mt-2">
               {player.stats.map((stat) => (
-                <p key={stat} className="rounded-lg bg-neutral-100 border border-neutral-200 px-2 py-1 text-[9px] text-neutral-800">{stat}</p>
+                <p key={stat} className="rounded-lg bg-neutral-100 border border-neutral-200 px-2 py-1 text-[9px] text-neutral-800">
+                  {stat}
+                </p>
               ))}
             </div>
           </div>
@@ -1606,12 +1729,22 @@ function MiniCard({ title, meta, badge, action, faded }) {
     <div className={`rounded-xl border p-2 ${faded ? "bg-neutral-200 border-neutral-300 opacity-70" : "bg-neutral-50 border-neutral-300"}`}>
       <div className="flex justify-between gap-2">
         <div>
-          <p className="text-[11px] font-bold text-black">{title}</p>
+          <p className="text-[11px] font-bold text-neutral-950">{title}</p>
           <p className="text-[9px] text-neutral-600 mt-0.5">{meta}</p>
         </div>
-        {badge && <span className="h-5 px-2 rounded-full bg-neutral-200 text-[8px] flex items-center text-neutral-800 whitespace-nowrap">{badge}</span>}
+
+        {badge && (
+          <span className="h-5 px-2 rounded-full bg-neutral-200 text-[8px] flex items-center text-neutral-800 whitespace-nowrap">
+            {badge}
+          </span>
+        )}
       </div>
-      {action && <button className="mt-2 w-full h-8 rounded-lg border border-neutral-400 bg-white text-[10px] font-bold text-black">{action}</button>}
+
+      {action && (
+        <button className="mt-2 w-full h-8 rounded-lg border border-neutral-400 bg-white text-[10px] font-bold text-neutral-900">
+          {action}
+        </button>
+      )}
     </div>
   );
 }
@@ -1623,13 +1756,19 @@ function TVScreen({ screen }) {
         <span className="inline-flex items-center justify-center rounded-full border px-2 py-0.5 text-[9px] font-black uppercase tracking-wide bg-violet-100 text-violet-900 border-violet-300">
           Écran public
         </span>
-        <p className="text-[10px] uppercase tracking-wide text-neutral-700 font-bold">{screen.subtitle}</p>
+        <p className="text-[10px] uppercase tracking-wide text-neutral-700 font-bold">
+          {screen.subtitle}
+        </p>
         <h2 className="text-sm font-black text-black leading-tight">{screen.title}</h2>
       </div>
 
       <div className="w-full max-w-[760px] h-[430px] mx-auto rounded-3xl bg-neutral-950 border border-neutral-800 p-3 shadow-xl">
-        <div className="h-full rounded-2xl bg-neutral-100 p-5 flex flex-col gap-4 overflow-hidden">
-          {screen.blocks.map((block, index) => <TVBlock key={index} block={block} />)}
+        <div className="h-full rounded-2xl bg-neutral-100 p-4 overflow-hidden">
+          <div className="h-full grid grid-rows-[auto_auto_1fr_auto] gap-3">
+            {screen.blocks.map((block, index) => (
+              <TVBlock key={index} block={block} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -1648,9 +1787,11 @@ function TVBlock({ block }) {
 
   if (block.type === "tvStatus") {
     return (
-      <div className="grid grid-cols-2 gap-3">
-        {block.items.map((item) => (
-          <div key={item} className="rounded-2xl bg-white border border-neutral-300 p-3 text-sm font-bold text-neutral-900">{item}</div>
+      <div className="grid grid-cols-4 gap-2">
+        {block.items.slice(0, 4).map((item) => (
+          <div key={item} className="rounded-xl bg-white border border-neutral-300 p-2 text-[11px] font-bold text-neutral-800 text-center leading-tight">
+            {item}
+          </div>
         ))}
       </div>
     );
@@ -1659,16 +1800,16 @@ function TVBlock({ block }) {
   if (block.type === "tvGameProgress") {
     return (
       <div className="rounded-2xl bg-white border border-neutral-300 p-3">
-        <div className="flex items-center justify-between mb-3">
-          <p className="text-sm font-black text-black">Avancement des jeux</p>
-          <p className="text-xs font-bold text-neutral-700">{block.done} faits · {block.total - block.done} restants</p>
+        <div className="flex items-center justify-between mb-2">
+          <p className="text-xs font-black text-neutral-950">Avancement des jeux</p>
+          <p className="text-[11px] font-bold text-neutral-600">{block.done} faits · {block.total - block.done} restants</p>
         </div>
 
-        <div className="flex gap-2">
-          {block.games.map((game) => (
+        <div className="grid grid-cols-6 gap-2">
+          {block.games.slice(0, 6).map((game) => (
             <div
               key={game.name}
-              className={`flex-1 min-w-0 rounded-xl border p-2 text-center ${
+              className={`min-w-0 rounded-xl border p-1.5 text-center ${
                 game.status === "done"
                   ? "bg-neutral-200 border-neutral-300 opacity-60"
                   : game.status === "current"
@@ -1678,8 +1819,8 @@ function TVBlock({ block }) {
                   : "bg-white border-neutral-300"
               }`}
             >
-              <div className={`mx-auto mb-1 h-8 w-8 rounded-xl ${game.status === "done" ? "bg-neutral-400" : game.status === "current" ? "bg-white" : "bg-neutral-300"}`} />
-              <p className="truncate text-[10px] font-bold">{game.name}</p>
+              <div className={`mx-auto mb-1 h-6 w-6 rounded-lg ${game.status === "done" ? "bg-neutral-400" : game.status === "current" ? "bg-white" : "bg-neutral-300"}`} />
+              <p className="truncate text-[9px] font-bold">{game.name}</p>
             </div>
           ))}
         </div>
@@ -1689,17 +1830,26 @@ function TVBlock({ block }) {
 
   if (block.type === "tvDoubleRanking") {
     return (
-      <div className="grid grid-cols-2 gap-4 flex-1 min-h-0">
-        <div className="rounded-2xl bg-white border border-neutral-300 p-4">
-          <p className="text-sm font-black mb-3 text-black">{block.generalTitle}</p>
-          <div className="space-y-2">
-            {block.generalRows.map((row) => <p key={row} className="rounded-xl bg-neutral-100 border border-neutral-300 px-3 py-2 text-sm font-bold text-neutral-900">{row}</p>)}
+      <div className="grid grid-cols-2 gap-3 min-h-0 overflow-hidden">
+        <div className="rounded-2xl bg-white border border-neutral-300 p-3 min-h-0 overflow-hidden">
+          <p className="text-xs font-black mb-2 text-black">{block.generalTitle}</p>
+          <div className="space-y-1.5">
+            {block.generalRows.slice(0, 3).map((row) => (
+              <p key={row} className="rounded-lg bg-neutral-100 border border-neutral-300 px-2 py-1.5 text-xs font-bold text-neutral-800 truncate">
+                {row}
+              </p>
+            ))}
           </div>
         </div>
-        <div className="rounded-2xl bg-white border border-neutral-300 p-4">
-          <p className="text-sm font-black mb-3 text-black">{block.gameTitle}</p>
-          <div className="space-y-2">
-            {block.gameRows.map((row) => <p key={row} className="rounded-xl bg-neutral-100 border border-neutral-300 px-3 py-2 text-sm font-bold text-neutral-900">{row}</p>)}
+
+        <div className="rounded-2xl bg-white border border-neutral-300 p-3 min-h-0 overflow-hidden">
+          <p className="text-xs font-black mb-2 text-black">{block.gameTitle}</p>
+          <div className="space-y-1.5">
+            {block.gameRows.slice(0, 3).map((row) => (
+              <p key={row} className="rounded-lg bg-neutral-100 border border-neutral-300 px-2 py-1.5 text-xs font-bold text-neutral-800 truncate">
+                {row}
+              </p>
+            ))}
           </div>
         </div>
       </div>
@@ -1708,11 +1858,24 @@ function TVBlock({ block }) {
 
   if (block.type === "tvRanking") {
     return (
-      <div className="rounded-2xl bg-white border border-neutral-300 p-4">
-        <p className="text-sm font-black mb-3 text-black">{block.title}</p>
-        <div className="space-y-2">
-          {block.rows.map((row) => <p key={row} className="rounded-xl bg-neutral-100 border border-neutral-300 px-3 py-2 text-base font-bold text-neutral-900">{row}</p>)}
+      <div className="rounded-2xl bg-white border border-neutral-300 p-3 min-h-0 overflow-hidden">
+        <p className="text-sm font-black mb-2 text-black">{block.title}</p>
+        <div className="space-y-1.5">
+          {block.rows.slice(0, 3).map((row) => (
+            <p key={row} className="rounded-xl bg-neutral-100 border border-neutral-300 px-3 py-1.5 text-sm font-bold text-neutral-900 truncate">
+              {row}
+            </p>
+          ))}
         </div>
+      </div>
+    );
+  }
+
+  if (block.type === "tvCelebration") {
+    return (
+      <div className="rounded-2xl bg-neutral-900 text-white border border-neutral-900 p-3 text-center">
+        <p className="text-2xl font-black leading-tight">{block.title}</p>
+        <p className="text-sm text-neutral-200 mt-1">{block.text}</p>
       </div>
     );
   }
@@ -1728,21 +1891,22 @@ export default function GameCircleWireframesCompact() {
           <p className="text-[11px] uppercase tracking-wide text-neutral-700 font-bold">
             GameCircle — Wireframes mobile-first · basse fidélité
           </p>
-
-          <h1 className="text-2xl font-black mt-1 text-black">
-            Parcours front — vues regroupées par usage
-          </h1>
-
+          <h1 className="text-2xl font-black mt-1 text-black">Parcours front — vues regroupées par usage</h1>
           <p className="text-sm text-neutral-700 mt-1 max-w-4xl">
-            Les couleurs servent uniquement à se repérer : préparation, soirée en cours, après-soirée, catalogue et administration. Elles ne représentent pas la charte graphique finale.
+            Les couleurs servent uniquement à se repérer : socle, préparation, soirée en cours, après-soirée, catalogue et administration. Elles ne représentent pas la charte graphique finale.
           </p>
         </header>
 
         <div className="flex flex-wrap gap-2 text-[11px] font-bold">
-          <span className="rounded-full border border-amber-300 bg-amber-100 text-amber-900 px-3 py-1">Organisateur</span>
-          <span className="rounded-full border border-sky-300 bg-sky-100 text-sky-900 px-3 py-1">Joueur / membre</span>
-          <span className="rounded-full border border-neutral-300 bg-neutral-100 text-neutral-900 px-3 py-1">Utilisateur</span>
-          <span className="rounded-full border border-rose-300 bg-rose-100 text-rose-900 px-3 py-1">Admin</span>
+          <span className="rounded-full border border-amber-300 bg-amber-100 text-amber-900 px-3 py-1">Rôle : Organisateur</span>
+          <span className="rounded-full border border-sky-300 bg-sky-100 text-sky-900 px-3 py-1">Rôle : Joueur / membre</span>
+          <span className="rounded-full border border-neutral-300 bg-neutral-100 text-neutral-900 px-3 py-1">Rôle : Utilisateur</span>
+          <span className="rounded-full border border-rose-300 bg-rose-100 text-rose-900 px-3 py-1">Rôle : Admin</span>
+          <span className="rounded-full border border-slate-300 bg-slate-100 text-slate-900 px-3 py-1">Phase : Socle</span>
+          <span className="rounded-full border border-amber-300 bg-amber-50 text-amber-900 px-3 py-1">Phase : Préparation édition</span>
+          <span className="rounded-full border border-emerald-300 bg-emerald-50 text-emerald-900 px-3 py-1">Phase : Soirée en cours</span>
+          <span className="rounded-full border border-sky-300 bg-sky-50 text-sky-900 px-3 py-1">Phase : Après-soirée / stats</span>
+          <span className="rounded-full border border-purple-300 bg-purple-50 text-purple-900 px-3 py-1">Phase : Mini-jeux / catalogue</span>
           <span className="rounded-full border border-violet-300 bg-violet-100 text-violet-900 px-3 py-1">Écran public TV</span>
         </div>
 
